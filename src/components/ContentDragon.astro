@@ -1,9 +1,6 @@
 ---
-// src/components/ContentDragon.astro
-
-// Definiamo la variabile per il percorso corretto dell'immagine del drago
-// Assumendo che il file si trovi in `public/img/dragon.svg`
 const dragonImageURL = `${import.meta.env.BASE_URL}img/dragon.svg`;
+const writerURL = `${import.meta.env.BASE_URL}writer/`;
 ---
 
 <div class="flex flex-col items-center justify-center h-full text-center">
@@ -20,6 +17,7 @@ const dragonImageURL = `${import.meta.env.BASE_URL}img/dragon.svg`;
 
     <button
         id="trigger-button"
+        data-redirect-url={writerURL}
         class="px-6 py-3 font-bold rounded-lg shadow-lg
             transition-all duration-200 transform hover:scale-105
             
@@ -41,11 +39,16 @@ const dragonImageURL = `${import.meta.env.BASE_URL}img/dragon.svg`;
         const handleClick = () => {
             button.disabled = true;
             button.textContent = "In viaggio...";
+
+            const redirectUrl = button.dataset.redirectUrl;
+
             document.dispatchEvent(new CustomEvent("trigger-dragon"));
             document.addEventListener(
                 "dragon-animation-finished",
                 () => {
-                    window.location.href = "./writer/";
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
                 },
                 { once: true },
             );
