@@ -1,17 +1,18 @@
 ---
 import "../styles/global.scss";
 import AnimatedDragon from "../components/AnimatedDragon.astro";
+const logoURL = `${import.meta.env.BASE_URL}img/logo.svg`;
 
 // Base domain URL without trailing slash
 const domainBaseURL = "https://alessandrolamartina.github.io";
-const ogImageUrl = "https://alessandrolamartina.github.io/img/meta.png";
 
+const ogImageUrl = `${Astro.site}${import.meta.env.BASE_URL.slice(1)}img/meta.png`;
 // Website publisher & region
 const authorPublisher = "Alessandro La Martina.";
 const geoRegion = "IT-TO";
 
 // SEO title, description and keywords
-const seoTitle = "Alessandro La Martina | Full-Stack .NET & Angular Developer";
+const seoTitle = "Alessandro La Martina | Full-Stack .NET Developer";
 const seoDescription =
     "Sviluppatore software specializzato in C# e .NET, con un approccio interdisciplinare che unisce pensiero analitico e scrittura creativa. Esplora il mio portfolio per scoprire progetti che fondono codice robusto e design intuitivo.";
 const seoKeywords =
@@ -70,7 +71,7 @@ const dublinCore = {
             rel="icon"
             type="image/svg+xml"
             crossorigin="anonymous"
-            href="/img/logo.svg"
+            href={logoURL}
         />
         <!-- <link rel="alternate icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
         <link rel="alternate icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
