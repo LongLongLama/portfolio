@@ -17,7 +17,6 @@ const writerURL = `${import.meta.env.BASE_URL}writer/`;
 
     <button
         id="trigger-button"
-        data-redirect-url={writerURL}
         class="px-6 py-3 font-bold rounded-lg shadow-lg
             transition-all duration-200 transform hover:scale-105
             
@@ -39,16 +38,11 @@ const writerURL = `${import.meta.env.BASE_URL}writer/`;
         const handleClick = () => {
             button.disabled = true;
             button.textContent = "In viaggio...";
-
-            const redirectUrl = button.dataset.redirectUrl;
-
             document.dispatchEvent(new CustomEvent("trigger-dragon"));
             document.addEventListener(
                 "dragon-animation-finished",
                 () => {
-                    if (redirectUrl) {
-                        window.location.href = redirectUrl;
-                    }
+                    window.location.href = "/portfolio/writer/";
                 },
                 { once: true },
             );
