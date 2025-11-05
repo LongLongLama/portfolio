@@ -2,18 +2,12 @@
 // src/pages/writer.astro
 import WriterLayout from "../layouts/WriterLayout.astro";
 
-// Importiamo i componenti che questa pagina utilizzerà.
 import WriterProfile from "../components/writer/WriterProfile.astro";
-// Aggiungiamo l'import per il bottone di switch
 import SwitchToCoder from "../components/writer/SwitchToCoder.astro";
 ---
 
-<!-- Usiamo il WriterLayout come guscio per l'intera pagina -->
 <WriterLayout>
-    <!-- 
-        Questo <main> è la card principale, con lo stesso stile a due colonne
-        della pagina da programmatore, ma con colori adatti al tema light.
-    -->
+
     <main
         class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-stone-300 rounded-2xl overflow-hidden shadow-2xl relative bg-stone-100 mb-12 md:mb-4"
     >
