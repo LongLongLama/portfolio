@@ -1,5 +1,6 @@
 ---
 import "../styles/global.scss";
+import AnimatedDragon from "../components/AnimatedDragon.astro";
 
 // Base domain URL without trailing slash
 const domainBaseURL = "https://alessandrolamartina.github.io";
@@ -118,5 +119,6 @@ const dublinCore = {
 
     <body class="min-h-[100vh] flex items-center justify-center p-4">
         <slot />
+        <AnimatedDragon />
     </body>
 </html>

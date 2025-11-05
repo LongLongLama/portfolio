@@ -1,0 +1,44 @@
+<div
+    id="dragon-transition-overlay"
+    class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-500 ease-in-out bg-black/50"
+>
+    <div
+        id="dragon-container"
+        class="fixed bottom-[-100vh] left-1/2 -translate-x-1/2 w-full max-w-4xl transition-transform duration-[4000ms] ease-in-out"
+    >
+        <lottie-player
+            id="dragon-player"
+            autoplay
+            loop
+            mode="normal"
+            src="/animations/dragon-animation.json"></lottie-player>
+    </div>
+</div>
+
+<script>
+    import "@lottiefiles/lottie-player";
+
+    document.addEventListener("trigger-dragon", () => {
+        const overlay = document.getElementById("dragon-transition-overlay");
+        const container = document.getElementById("dragon-container");
+
+        if (overlay && container) {
+            overlay.classList.remove("opacity-0");
+            overlay.classList.add("pointer-events-auto");
+            container.style.transform = "translate(-50%, -150vh)";
+
+            // Mettiti in ascolto per la fine della transizione CSS
+            container.addEventListener(
+                "transitionend",
+                () => {
+                    // Quando la transizione è finita, lancia un nuovo evento
+                    // per dire al bottone che può reindirizzare.
+                    document.dispatchEvent(
+                        new CustomEvent("dragon-animation-finished"),
+                    );
+                },
+                { once: true },
+            ); // { once: true } assicura che l'evento venga catturato una sola volta
+        }
+    });
+</script>

@@ -1,5 +1,4 @@
 <div class="flex flex-col items-center justify-center h-full text-center">
-    <!-- Usa un tag <img> standard con un percorso che inizia con "/" -->
     <img
         src="/img/dragon.svg"
         alt="Illustrazione di un drago"
@@ -12,12 +11,55 @@
         ...forse non sei qui per il codice?
     </p>
 
-    <!-- Bottone -->
-    <a
-        href="#"
-        id="dragon-button"
+    <button
+        id="trigger-button"
         class="px-6 py-3 font-bold text-white bg-sky-500 rounded-lg shadow-lg hover:bg-sky-600 transition-all duration-200 transform hover:scale-105"
     >
-        Portami altrove
-    </a>
+        portami altrove
+    </button>
 </div>
+
+<script>
+    const button = document.getElementById(
+        "trigger-button",
+    ) as HTMLButtonElement;
+    if (button) {
+        // Funzione per gestire il click, resa asincrona
+        const handleClick = () => {
+            // Disabilita subito il bottone per evitare doppi click
+            button.disabled = true;
+            button.textContent = "In viaggio..."; // Feedback visivo
+
+            // 1. Lancia l'evento per far partire l'animazione
+            document.dispatchEvent(new CustomEvent("trigger-dragon"));
+
+            // 2. Mettiti in ascolto per l'evento di fine animazione
+            document.addEventListener(
+                "dragon-animation-finished",
+                () => {
+                    // 3. Solo quando l'animazione è finita, reindirizza
+                    window.location.href = "/writer-home";
+                },
+                { once: true },
+            );
+        };
+
+        button.addEventListener("click", handleClick);
+    }
+
+    // Aggiungiamo un listener per l'evento "pageshow" per resettare lo stato
+    // quando l'utente torna indietro nella cronologia.
+    window.addEventListener("pageshow", (event) => {
+        if (event.persisted) {
+            // La pagina è stata ripristinata dalla bfcache
+            const button = document.getElementById(
+                "trigger-button",
+            ) as HTMLButtonElement;
+            if (button) {
+                // Resetta il bottone al suo stato originale
+                button.disabled = false;
+                button.textContent = "Portami altrove";
+            }
+        }
+    });
+</script>
