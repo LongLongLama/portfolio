@@ -1,38 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-import Profile from '../components/Profile.astro';
-import Contact from '../components/Contact.astro';
+import Profile from "../components/Profile.astro";
+import Contact from "../components/Contact.astro";
 
-import ContentLink from '../components/ContentLink.astro';
-import ContentCode from '../components/ContentAbout.astro';
-import ContentProjects from '../components/ContentProjects.astro';
+import ContentLink from "../components/ContentLink.astro";
+import ContentCode from "../components/ContentAbout.astro";
+import ContentProjects from "../components/ContentProjects.astro";
 ---
 
 <Layout>
-
     <!-- Start: Main Wrapper -->
-    <main class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-gray-600 rounded-2xl overflow-hidden shadow-2xl relative bg-black mb-12 md:mb-4">
-
+    <main
+        class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-gray-600 rounded-2xl overflow-hidden shadow-2xl relative bg-black mb-12 md:mb-4"
+    >
         <!-- Start: Left / upper card -->
-        <div class="p-8 md:p-6 flex flex-col justify-between w-full md:w-2/5 border-b md:border-b-0 md:border-r border-gray-600">
-
+        <div
+            class="p-8 md:p-6 flex flex-col justify-between w-full md:w-2/5 border-b md:border-b-0 md:border-r border-gray-600"
+        >
             <Profile />
 
             <Contact />
-
         </div>
         <!-- End: Left / upper card -->
 
         <!-- Start: Right / lower card (yes 4/5 instead of 3/5) -->
         <div class="w-full md:w-4/5 p-0">
-
             <!-- Start: Inner wrapper -->
             <div class="min-h-full h-[90vh] flex flex-col overflow-y-scroll">
-
                 <!-- Use hidden radio buttons to control the tabs -->
                 <div class="tab-controls">
-
                     <input
                         type="radio"
                         id="tab1"
@@ -49,24 +46,20 @@ import ContentProjects from '../components/ContentProjects.astro';
                     />
 
                     <!-- Start: Tab bar -->
-                    <div class="flex bg-black border-b border-gray-600 sticky top-0 z-10">
-
-                        <ContentLink
-                            contentId="tab1"
-                            contentName="about.ts"
-                        />
+                    <div
+                        class="flex bg-black border-b border-gray-600 sticky top-0 z-10"
+                    >
+                        <ContentLink contentId="tab1" contentName="about.ts" />
 
                         <ContentLink
                             contentId="tab2"
                             contentName="projects.md"
                         />
-
                     </div>
                     <!-- End: Tab bar -->
 
                     <!-- Start: Tab content -->
                     <div class="p-6 flex-grow overflow-y-auto bg-black">
-
                         <!-- Start: About content -->
                         <div id="content1" class="tab-content">
                             <ContentCode />
@@ -78,30 +71,34 @@ import ContentProjects from '../components/ContentProjects.astro';
                             <ContentProjects />
                         </div>
                         <!-- End: Projects content -->
-
                     </div>
                     <!-- End: Tab content -->
-
                 </div>
-
             </div>
             <!-- End: Inner wrapper -->
-
         </div>
         <!-- End: Right / lower card -->
-
     </main>
     <!-- End: Main Wrapper -->
 
-    <!-- Credits -->
-    <div class="fixed md:absolute bottom-0 left-0 right-0 w-full text-center bg-black py-2">
-        Built with <a href="https://astro.build" title="Astro" target="_blank" class="text-primary hover:underline">Astro</a> by <a href="https://devidev.io/" target="_blank" title="devi|dev|io" class="text-primary hover:underline">devi|dev|io</a>
+    <!-- Footer -->
+    <div
+        class="fixed md:absolute bottom-0 left-0 right-0 w-full text-center bg-black py-2 text-sm text-gray-500"
+    >
+        <span>© {new Date().getFullYear()} Alessandro La Martina.</span>
+        <span class="mx-2">|</span>
+        <span
+            >Costruito con <a
+                href="https://astro.build"
+                title="Astro Framework"
+                target="_blank"
+                class="text-primary hover:underline">Astro</a
+            >.</span
+        >
     </div>
-
 </Layout>
 
 <style is:global>
-
     /* Hide the radio buttons */
     .tab-radio {
         @apply absolute opacity-0 pointer-events-none;
@@ -136,5 +133,4 @@ import ContentProjects from '../components/ContentProjects.astro';
     #tab2:checked ~ .flex .tab-link:nth-child(2) {
         @apply border-b-2 border-b-primary;
     }
-
 </style>

@@ -1,100 +1,58 @@
 ---
-import { Code } from 'astro:components';
+import { Code } from "astro:components";
 
-const code = `interface Developer {
+const code = `interface DeveloperProfile {
     name: string;
-    skills: string[];
-    interests: string[];
-};
+    contact: {
+        email: string;
+        phone: string;
+    },
+    skills: {
+        languages: string[];
+        backend: string[];
+        frontend: string[];
+        databases: string[];
+        tools: string[];
+    },
+    softSkills: string[];
+}
 
-interface TechStack {
-    devOps: string[];
-    backend: string[];
-   frontend: string[];
-};
-
-type ContactType = 'github' | 'twitter' | 'linkedIn' | 'xing' | 'email';
-
-const techStack: TechStack = {
-    devOps: [
-        'GitLab',
-        'GitHub',
-        'Cloudflare',
-        'Docker'
-    ],
-    frontend: [
-        'Angular',
-        'JavaScript',
-        'TypeScript',
-        'TailwindCSS',
-        'PrimeNG',
-        'Astro',
-        'Ionic',
-        'Stencil',
-        'Capacitor',
-        'SCSS',
-        'Markdown',
-        'WordPress'
-    ],
-    backend: [
-        'Supabase',
-        'Node.js',
-        'Bun',
-        'Deno',
-        'PostgreSQL',
-        'MySQL',
-        'S3 Storage',
-        'Resend'
+const alessandro: DeveloperProfile = {
+    name: "Alessandro La Martina",
+    contact: {
+        email: "lamartinaalessandro3@gmail.com",
+        phone: "+39 3703427335"
+    },
+    skills: {
+        languages: ["C#", "Java", "Python", "TypeScript", "C"],
+        backend: [".NET", "REST API", "Entity Framework", "Dapper", "ADO.NET"],
+        frontend: ["Angular", "HTML", "CSS"],
+        databases: ["Microsoft SQL Server", "MySQL"],
+        tools: ["NuGet", "NPM", "Git", "GitHub"]
+    },
+    softSkills: [
+        "Problem Solving",
+        "Teamwork",
+        "Technical Writing",
+        "Creative Writing",
+        "Business Plan Analysis"
     ]
 };
 
-// Developer profile
-const me: Developer = {
-    name: 'Dejan Vi.',
-    skills: [
-        ...techStack.devOps,
-        ...techStack.backend,
-        ...techStack.frontend
-    ],
-    interests: [
-        'Open Source',
-        'Security',
-        'Privacy',
-        'Performance',
-        'Self-Hosting',
-        'Networking'
-    ]
+// Contattami sui miei profili professionali
+const openProfile = (platform: 'github' | 'linkedin') => {
+    const urls = {
+        github: "https://github.com/longlonglama",     
+        linkedin: "https://www.linkedin.com/in/alessandro-la-martina-1a84302b0/" //
+    };
+    window.open(urls[platform], '_blank');
 };
-
-// Contact function
-const contact = (type: ContactType): string => {
-    switch (type) {
-        case 'github':
-            return 'https://github.com/devidevio';
-        case 'twitter':
-            return 'https://x.com/devidev_io';
-        case 'linkedIn':
-            return 'https://www.linkedin.com/in/dejan-vi';
-        case 'xing':
-            return 'https://www.xing.com/profile/Dejan_Vintonjiv';
-        case 'email':
-            return 'hi@devidev.io';
-        default:
-            return 'Send fax.';
-    }
-};
-
 `;
 ---
 
-<Code
-    code={code}
-    lang="js"
-    wrap={true}
-/>
+<Code code={code} lang="js" wrap={true} />
 
 <style is:global>
-
     /* Custom styling for code block line numbers */
     pre.astro-code {
         @apply bg-transparent !important;
@@ -115,5 +73,4 @@ const contact = (type: ContactType): string => {
         counter-increment: step;
         @apply text-gray-600 pr-2;
     }
-
 </style>
