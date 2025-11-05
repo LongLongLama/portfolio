@@ -7,6 +7,8 @@ import Contact from "../components/Contact.astro";
 import ContentLink from "../components/ContentLink.astro";
 import ContentCode from "../components/ContentAbout.astro";
 import ContentProjects from "../components/ContentProjects.astro";
+
+import ContentDragon from "../components/ContentDragon.astro";
 ---
 
 <Layout>
@@ -45,6 +47,13 @@ import ContentProjects from "../components/ContentProjects.astro";
                         class="tab-radio"
                     />
 
+                    <input
+                        type="radio"
+                        id="tab3"
+                        name="tabs"
+                        class="tab-radio"
+                    />
+
                     <!-- Start: Tab bar -->
                     <div
                         class="flex bg-black border-b border-gray-600 sticky top-0 z-10"
@@ -54,6 +63,11 @@ import ContentProjects from "../components/ContentProjects.astro";
                         <ContentLink
                             contentId="tab2"
                             contentName="projects.md"
+                        />
+
+                        <ContentLink
+                            contentId="tab3"
+                            contentName="elsewhere.ini"
                         />
                     </div>
                     <!-- End: Tab bar -->
@@ -69,6 +83,10 @@ import ContentProjects from "../components/ContentProjects.astro";
                         <!-- Start: Projects content -->
                         <div id="content2" class="tab-content">
                             <ContentProjects />
+                        </div>
+
+                        <div id="content3" class="tab-content h-full">
+                            <ContentDragon />
                         </div>
                         <!-- End: Projects content -->
                     </div>
@@ -131,6 +149,14 @@ import ContentProjects from "../components/ContentProjects.astro";
     }
 
     #tab2:checked ~ .flex .tab-link:nth-child(2) {
+        @apply border-b-2 border-b-primary;
+    }
+
+    #tab3:checked ~ * #content3 {
+        @apply block opacity-100;
+    }
+
+    #tab3:checked ~ .flex .tab-link:nth-child(3) {
         @apply border-b-2 border-b-primary;
     }
 </style>
