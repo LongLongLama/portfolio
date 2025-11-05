@@ -1,0 +1,42 @@
+---
+// src/pages/writer.astro
+import WriterLayout from "../layouts/WriterLayout.astro";
+
+// Importiamo i componenti che questa pagina utilizzerà.
+// Per ora daranno un errore finché non li creiamo, è normale.
+import WriterProfile from "../components/writer/WriterProfile.astro";
+// import WriterProjects from '../components/writer/WriterProjects.astro';
+//import SwitchToCoder from "../components/writer/SwitchToCoder.astro";
+---
+
+<!-- Usiamo il WriterLayout come guscio per l'intera pagina -->
+<WriterLayout>
+    <!-- 
+        Questo <main> è la card principale, con lo stesso stile a due colonne
+        della pagina da programmatore, ma con colori adatti al tema light.
+    -->
+    <main
+        class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-stone-300 rounded-2xl overflow-hidden shadow-2xl relative bg-stone-100 mb-12 md:mb-4"
+    >
+        <!-- Colonna Sinistra: Profilo e bottone per tornare indietro -->
+        <div
+            class="p-8 md:p-6 flex flex-col justify-between w-full md:w-2/5 border-b md:border-b-0 md:border-r border-stone-300"
+        >
+            <WriterProfile />
+        </div>
+
+        <!-- Colonna Destra: Qui andranno i progetti di scrittura con i tab -->
+        <div class="w-full md:w-4/5 p-0">
+            <!-- Per ora mettiamo un placeholder. Sostituiremo questo div con il componente WriterProjects.astro -->
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-zinc-800">
+                    Progetti di Scrittura
+                </h2>
+                <p class="text-zinc-600 mt-2">
+                    Questa sezione è in costruzione. Torna presto per leggere i
+                    miei racconti, sceneggiature e romanzi!
+                </p>
+            </div>
+        </div>
+    </main>
+</WriterLayout>

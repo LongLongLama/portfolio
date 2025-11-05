@@ -1,0 +1,106 @@
+---
+// src/layouts/WriterLayout.astro
+import "../styles/global.scss";
+// Non includiamo l'animazione del drago di default in questo layout.
+// Potremmo aggiungerne una diversa per tornare indietro se necessario.
+
+// --- INFORMAZIONI SEO SPECIFICHE PER LA PAGINA DA SCRITTORE ---
+const domainBaseURL = "https://alessandrolamartina.github.io"; // Mantieni lo stesso dominio base
+const ogImageUrl = `${domainBaseURL}/img/social-preview-writer.png`; // Crea un'immagine di anteprima diversa per questa sezione
+const authorPublisher = "Alessandro La Martina";
+const geoRegion = "IT-TO";
+
+const seoTitle = "Alessandro La Martina | Scrittore e Creativo";
+const seoDescription =
+    "Esplorazione di mondi narrativi attraverso racconti, sceneggiature e romanzi. Scopri i miei progetti di scrittura creativa e la mia passione per lo storytelling.";
+const seoKeywords =
+    "Alessandro La Martina, Scrittore, Scrittura Creativa, Racconti, Sceneggiature, Romanzi, Storytelling, Portfolio";
+
+// --- Oggetti per i meta tag (personalizzati per la writer mode) ---
+const openGraph = {
+    title: seoTitle,
+    description: seoDescription,
+    url: `${domainBaseURL}/writer`, // URL specifico di questa pagina
+    image: ogImageUrl,
+    type: "profile",
+    locale: "it_IT",
+    siteName: "Alessandro La Martina | Scrittura",
+};
+
+const dublinCore = {
+    title: "Alessandro La Martina | Scrittura",
+    creator: authorPublisher,
+    publisher: authorPublisher,
+    rights: authorPublisher,
+    description: seoDescription,
+    language: "it",
+    type: "Text",
+    format: "text/html",
+};
+---
+
+<!doctype html>
+<html lang="it">
+    <!-- Nessuna classe 'dark' qui, sarà light di default -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/img/logo.svg" />
+
+        <!-- Import del font per la scrittura a mano -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Crawler & Robots -->
+        <meta name="robots" content="index, follow" />
+        <meta name="revisit-after" content="7 days" />
+
+        <!-- Titolo e Descrizione Principali -->
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={seoKeywords} />
+        <link rel="canonical" href={Astro.url} />
+
+        <!-- Meta Dati Geografici e Autore -->
+        <meta name="geo.region" content={geoRegion} />
+        <meta name="author" content={authorPublisher} />
+        <meta name="publisher" content={authorPublisher} />
+
+        <!-- Open Graph (per Facebook, LinkedIn, etc.) -->
+        <meta property="og:title" content={openGraph.title} />
+        <meta property="og:description" content={openGraph.description} />
+        <meta property="og:url" content={openGraph.url} />
+        <meta property="og:type" content={openGraph.type} />
+        <meta property="og:image" content={openGraph.image} />
+        <meta property="og:locale" content={openGraph.locale} />
+        <meta property="og:site_name" content={openGraph.siteName} />
+
+        <!-- Dublin Core (DC) -->
+        <meta name="DC.Title" content={dublinCore.title} />
+        <meta name="DC.Creator" content={dublinCore.creator} />
+        <meta name="DC.Rights" content={dublinCore.rights} />
+        <meta name="DC.Publisher" content={dublinCore.publisher} />
+        <meta name="DC.Description" content={dublinCore.description} />
+        <meta name="DC.Language" content={dublinCore.language} />
+        <meta name="DC.Type" content={dublinCore.type} />
+        <meta name="DC.Format" content={dublinCore.format} />
+    </head>
+
+    <!--
+        Stili del Body per la Writer Mode:
+        - bg-stone-50: Sfondo bianco sporco, effetto pergamena
+        - text-zinc-800: Testo quasi nero, per un buon contrasto
+        - font-writer: Applica il font 'Caveat' che abbiamo definito in tailwind.config.js
+        - Classi di layout per centrare il contenuto
+    -->
+    <body
+        class="bg-stone-50 text-zinc-800 font-writer min-h-screen flex items-center justify-center p-4"
+    >
+        <!-- Il contenuto della pagina (es. writer.astro) verrà inserito qui -->
+        <slot />
+    </body>
+</html>

@@ -6,6 +6,10 @@ export default {
         extend: {
             colors: {
                 primary: '#F43F5E'
+            },
+            fontFamily: {
+
+                writer: ['Caveat', 'cursive'],
             }
         }
     }
