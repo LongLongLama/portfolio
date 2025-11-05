@@ -1,7 +1,7 @@
 ---
-// src/components/writer/WriterProfile.astro
+
 import { Picture } from "astro:assets";
-// Usiamo la stessa immagine del profilo, ma puoi cambiarla se vuoi
+
 import ProfilePicture from "../../assets/profile.jpg";
 
 const profile = {
@@ -17,7 +17,7 @@ const profile = {
     class="flex flex-col gap-6 items-center text-center sm:items-start sm:text-left"
 >
     <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
-        <!-- L'immagine del profilo. Il bordo ora usa il colore primario del tema light. -->
+        
         <Picture
             src={ProfilePicture}
             formats={["webp"]}
@@ -29,7 +29,7 @@ const profile = {
         />
 
         <div>
-            <!-- Colori del testo adattati per lo sfondo chiaro -->
+        
             <h1 class="text-3xl md:text-4xl font-bold text-zinc-900">
                 {profile.name}
             </h1>
@@ -60,7 +60,7 @@ const profile = {
         </div>
     </div>
 
-    <!-- Colore del testo della descrizione adattato per lo sfondo chiaro -->
+  
     <p class="text-lg leading-relaxed mt-4 text-zinc-700">
         {profile.description}
     </p>
