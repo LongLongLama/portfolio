@@ -1,0 +1,43 @@
+---
+// src/components/writer/ProjectCard.astro
+interface Project {
+    title: string;
+    slug: string;
+    characterIcon?: string;
+    description?: string;
+}
+interface Props {
+    project: Project;
+    category: string;
+}
+const { project, category } = Astro.props as Props;
+
+const loremIpsum =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...";
+---
+
+<div
+    class="bg-white rounded-lg p-6 flex flex-col
+        border border-stone-200
+        hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+>
+    <!-- Titolo -->
+    <h3
+        class="text-2xl font-bold text-zinc-900 mb-3"
+        style="font-family: 'Caveat', cursive;"
+    >
+        {project.title}
+    </h3>
+
+    <p
+        class="text-zinc-600 text-base mb-6 flex-grow"
+        style="font-family: 'Merriweather', serif; line-height: 1.6;"
+    >
+        {project.description || loremIpsum}
+    </p>
+
+    <!-- Bottone -->
+    <a href={`/${category}/${project.slug}/`} class="..." style="...">
+        Leggi di più
+    </a>
+</div>

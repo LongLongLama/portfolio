@@ -1,0 +1,204 @@
+---
+// src/components/writer/WriterProjects.astro
+import ContentLink from "../ContentLink.astro";
+import SwitchToCoder from "./SwitchToCoder.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Project {
+    title: string;
+    slug: string;
+    characterIcon?: string;
+}
+interface ProjectsByCategory {
+    racconti: Project[];
+    romanzi: Project[];
+    audioracconti: Project[];
+    sceneggiature: Project[];
+    cortometraggi: Project[];
+    documentari: Project[];
+}
+interface Props {
+    projects: ProjectsByCategory;
+}
+const { projects } = Astro.props as Props;
+---
+
+<div class="w-full h-full flex flex-col">
+    <!-- 1. I RADIO BUTTON -->
+    <input
+        type="radio"
+        id="tab-racconti"
+        name="writer-tabs"
+        class="tab-radio"
+        checked
+    />
+    <input type="radio" id="tab-romanzi" name="writer-tabs" class="tab-radio" />
+    <input
+        type="radio"
+        id="tab-audioracconti"
+        name="writer-tabs"
+        class="tab-radio"
+    />
+    <input
+        type="radio"
+        id="tab-sceneggiature"
+        name="writer-tabs"
+        class="tab-radio"
+    />
+    <input
+        type="radio"
+        id="tab-cortometraggi"
+        name="writer-tabs"
+        class="tab-radio"
+    />
+    <input
+        type="radio"
+        id="tab-documentari"
+        name="writer-tabs"
+        class="tab-radio"
+    />
+    <input type="radio" id="tab-switch" name="writer-tabs" class="tab-radio" />
+
+    <!-- 2. LA BARRA DEI TAB -->
+    <div
+        class="flex-shrink-0 flex border-b sticky top-0 z-10 bg-stone-100 border-stone-300 overflow-x-auto"
+    >
+        <div class="flex">
+            <ContentLink
+                contentId="tab-racconti"
+                contentName="Racconti"
+                className="text-lg"
+            />
+            <ContentLink
+                contentId="tab-romanzi"
+                contentName="Romanzi"
+                className="text-lg"
+            />
+            <ContentLink
+                contentId="tab-audioracconti"
+                contentName="Audioracconti"
+                className="text-lg"
+            />
+            <ContentLink
+                contentId="tab-sceneggiature"
+                contentName="Sceneggiature"
+                className="text-lg"
+            />
+            <ContentLink
+                contentId="tab-cortometraggi"
+                contentName="Cortometraggi"
+                className="text-lg"
+            />
+            <ContentLink
+                contentId="tab-documentari"
+                contentName="Documentari"
+                className="text-lg"
+            />
+            <ContentLink
+                contentId="tab-switch"
+                contentName="elsewhere.sh"
+                className="text-lg"
+            />
+        </div>
+    </div>
+
+    <!-- 3. L'AREA DEL CONTENUTO, CHE CRESCE E SCORRE -->
+    <div class="flex-grow p-6 overflow-y-auto">
+        <div
+            id="content-racconti"
+            class="tab-content grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            {
+                projects.racconti.map((p) => (
+                    <ProjectCard project={p} category="racconti" />
+                ))
+            }
+        </div>
+
+        <div
+            id="content-romanzi"
+            class="tab-content grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            {
+                projects.romanzi.map((p) => (
+                    <ProjectCard project={p} category="romanzi" />
+                ))
+            }
+        </div>
+
+        <div
+            id="content-audioracconti"
+            class="tab-content grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            {
+                projects.audioracconti.map((p) => (
+                    <ProjectCard project={p} category="audioracconti" />
+                ))
+            }
+        </div>
+        <div
+            id="content-sceneggiature"
+            class="tab-content grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            {
+                projects.sceneggiature.map((p) => (
+                    <ProjectCard project={p} category="sceneggiature" />
+                ))
+            }
+        </div>
+        <div
+            id="content-cortometraggi"
+            class="tab-content grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            {
+                projects.cortometraggi.map((p) => (
+                    <ProjectCard project={p} category="cortometraggi" />
+                ))
+            }
+        </div>
+        <div
+            id="content-documentari"
+            class="tab-content grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            {
+                projects.documentari.map((p) => (
+                    <ProjectCard project={p} category="documentari" />
+                ))
+            }
+        </div>
+        <div id="content-switch" class="tab-content h-full">
+            <SwitchToCoder />
+        </div>
+    </div>
+</div>
+
+<style is:global>
+    .tab-radio {
+        @apply absolute opacity-0 pointer-events-none;
+    }
+    .tab-content {
+        @apply hidden;
+    }
+
+    /* 
+        SELETTORE SEMPLIFICATO: Ora gli input sono fratelli diretti dei contenitori
+    */
+    #tab-racconti:checked ~ div > #content-racconti,
+    #tab-romanzi:checked ~ * #content-romanzi,
+    #tab-audioracconti:checked ~ div > #content-audioracconti,
+    #tab-sceneggiature:checked ~ div > #content-sceneggiature,
+    #tab-cortometraggi:checked ~ div > #content-cortometraggi,
+    #tab-documentari:checked ~ div > #content-documentari,
+    #tab-switch:checked ~ div > #content-switch {
+        @apply block;
+    }
+
+    #tab-racconti:checked ~ div > div > .tab-link[for="tab-racconti"],
+    #tab-audioracconti:checked ~ div > div > .tab-link[for="tab-audioracconti"],
+    #tab-sceneggiature:checked ~ div > div > .tab-link[for="tab-sceneggiature"],
+    #tab-cortometraggi:checked ~ div > div > .tab-link[for="tab-cortometraggi"],
+    #tab-documentari:checked ~ div > div > .tab-link[for="tab-documentari"],
+    #tab-switch:checked ~ div > div > .tab-link[for="tab-switch"] {
+        @apply border-b-2 border-b-blue-700;
+    }
+</style>

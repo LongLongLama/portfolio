@@ -1,0 +1,81 @@
+---
+// src/pages/racconti/[slug].astro
+import WriterLayout from "../../layouts/WriterLayout.astro";
+
+// Questa funzione è obbligatoria per le pagine dinamiche in Astro.
+// In futuro, leggerà i tuoi file Markdown per generare le pagine.
+// Per ora, creiamo delle pagine finte.
+export async function getStaticPaths() {
+    const racconti = [
+        { slug: "il-significante", title: "Il Significante" },
+        { slug: "un-periodico-pulsare", title: "Un Periodico Pulsare" },
+        { slug: "lo-stretto-delle-sirene", title: "Lo Stretto delle Sirene" },
+        { slug: "di-noi-e-le-rocce", title: "Di Noi e le Rocce" },
+        { slug: "oggi-devi-morire", title: "Oggi Devi Morire!" },
+    ];
+
+    return racconti.map((racconto) => ({
+        params: { slug: racconto.slug },
+        props: { opera: racconto },
+    }));
+}
+
+const { opera } = Astro.props;
+---
+
+<WriterLayout>
+    <div
+        class="bg-stone-100 p-8 md:p-12 max-w-4xl mx-auto rounded-lg shadow-lg"
+        style="font-family: 'Merriweather', serif;"
+    >
+        <h1
+            class="text-4xl md:text-5xl font-bold text-zinc-900 mb-8 text-center"
+            style="font-family: 'Caveat', cursive;"
+        >
+            {opera.title}
+        </h1>
+
+        <div class="prose prose-lg max-w-none text-zinc-800 leading-relaxed">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                dapibus, justo nec varius euismod, eros sem convallis tortor, et
+                commodo magna mi ut metus. Sed vel orci a odio auctor mollis.
+                Praesent quis nunc eget sem interdum malesuada. Vivamus in lorem
+                sed massa tincidunt tincidunt. Nam nec elit ac elit consequat
+                tincidunt. Nulla facilisi. Curabitur vel justo nec libero
+                tincidunt feugiat.
+            </p>
+            <p>
+                Phasellus auctor, justo id consequat tincidunt, nunc nunc
+                tincidunt nunc, id tincidunt nunc nunc id nunc. Sed id semper
+                nunc. Nulla facilisi. Sed id semper nunc. Nulla facilisi. Sed id
+                semper nunc. Nulla facilisi. Sed id semper nunc. Nulla facilisi.
+            </p>
+            <blockquote
+                class="border-l-4 border-stone-300 pl-4 italic text-zinc-600"
+            >
+                "Vestibulum ante ipsum primis in faucibus orci luctus et
+                ultrices posuere cubilia Curae; Donec velit neque, auctor sit
+                amet aliquam vel, ullamcorper sit amet ligula."
+            </blockquote>
+            <p>
+                Aenean eu leo quam. Pellentesque ornare sem lacinia quam
+                venenatis vestibulum. Curabitur blandit tempus porttitor. Cras
+                mattis consectetur purus sit amet fermentum. Donec id elit non
+                mi porta gravida at eget metus. Vivamus sagittis lacus vel augue
+                laoreet rutrum faucibus dolor auctor. Maecenas sed diam eget
+                risus varius blandit sit amet non magna.
+            </p>
+        </div>
+
+        <div class="text-center mt-12">
+            <a
+                href="/writer/"
+                class="font-bold text-white bg-blue-600 rounded-lg py-3 px-6 hover:bg-blue-700 transition-colors"
+                style="font-family: 'Caveat', cursive; font-size: 1.5rem;"
+            >
+                Torna ai Progetti
+            </a>
+        </div>
+    </div>
+</WriterLayout>

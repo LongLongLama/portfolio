@@ -1,47 +1,98 @@
 ---
 // src/pages/writer.astro
 import WriterLayout from "../layouts/WriterLayout.astro";
-
 import WriterProfile from "../components/writer/WriterProfile.astro";
-import SwitchToCoder from "../components/writer/SwitchToCoder.astro";
+import WriterProjects from "../components/writer/WriterProjects.astro";
+
+// --- DEFINIAMO QUI TUTTI I TUOI PROGETTI DI SCRITTURA ---
+const projects = {
+    racconti: [
+        {
+            title: "Il Significante",
+            slug: "il-significante",
+            description:
+                "Un minatore sogna il cielo mentre sposta pietre, un cantore sogna la musica mentre fugge dalla terra, e un giovane nobile cerca il suo posto sotto una Luna che si sgretola. Una storia di padri e figli, legati dal sacrificio e dal mito di un drago guardiano.",
+        },
+        {
+            title: "Un Periodico Pulsare",
+            slug: "un-periodico-pulsare",
+            description:
+                "L'equipaggio della Santa Lattea segue da secoli la Sacra Rotta, un percorso infallibile tracciato dagli Avi. Ma quando un inspiegabile pulsare cosmico viene rilevato, la fede nella scienza vacilla. L'umanità si trova di fronte all'estinzione ma per due amanti è l'ultima, disperata occasione per consacrare la loro unione.",
+        },
+        {
+            title: "Lo Stretto delle Sirene",
+            slug: "lo-stretto-delle-sirene",
+            description:
+                "C'è un detto: un pirata non può sognare di essere un uomo. Per un ragazzo sordo cresciuto tra i bucanieri, il desiderio di una vita normale è un'eco silenziosa. La sua fuga dal mare lo porterà a scoprire una verità ancora più crudele nello Stretto delle Sirene, un luogo dove la musica uccide e la bellezza nasconde un orrore inimmaginabile. Una storia di mostri, percepiti e reali.",
+        },
+        {
+            title: "Di Noi e le Rocce",
+            slug: "di-noi-e-le-rocce",
+            description:
+                "Attraverso il rito generazionale di visitare una tomba quasi invisibile, un giovane apprende la più grande lezione sulla vita e sulla morte: tutto ciò che è stato, dalla roccia all'uomo, viene semplicemente ridistribuito nella terra. Un racconto sulla paura della fine e sulla serena accettazione di far parte di un ciclo eterno.",
+        },
+        {
+            title: "Oggi Devi Morire!",
+            slug: "oggi-devi-morire",
+            description:
+                "Il pubblico non empatizza con personaggi felici. L'editore vuole un finale tragico. Lo scrittore, invece, è felice e innamorato. In questo scontro tra le esigenze del mercato e l'affetto per la propria creazione, l'autore consegna un ultimatum al suo protagonista: 'O muori, o non vieni pubblicato'. Un racconto ironico sulla crudele meccanica dello storytelling.",
+        },
+    ],
+    romanzi: [
+        {
+            title: "Matematica, e Altre Arti Minori",
+            slug: "matematica-e-altre-arti-minori",
+            description:
+                "In un retrofuturo stanco, dove le utopie sono fallite, il geniale matematico Godfrey fugge sulla Luna per affrontare il terrore della propria decadenza creativa. Ma la sua crisi esistenziale si intreccia con una minaccia politica: Donna Elisa, una leader carismatica, vuole usare la filosofia del relativismo per smantellare ogni verità. Una caccia all'uomo tra le stelle e la Terra per il controllo di un'idea, in un romanzo che esplora il brutale impatto della filosofia sul potere.",
+        },
+        { title: "Dottore!", slug: "dottore" },
+        { title: "O L'Ottimismo", slug: "o-l-ottimismo" },
+    ],
+    audioracconti: [
+        {
+            title: "Bevi Più Acqua",
+            slug: "bevi-piu-acqua",
+            description:
+                "L'inventore Stanley Meyer, creatore di un controverso motore ad acqua, muore avvelenato dopo un incontro con potenziali investitori. Anni dopo, suo fratello Stephen è costretto a rivivere quel giorno fatale, testimoniando alla polizia. Attraverso i suoi ricordi, emerge il ritratto di un genio paranoico, braccato da nemici reali o immaginari. Chi ha ucciso Stanley Meyer?",
+        },
+    ],
+    sceneggiature: [
+        {
+            title: "Rugiada",
+            slug: "rugiada",
+            description:
+                "In una foresta magica governata da un fragile equilibrio, la morte misteriosa di un animale scatena un'epidemia di paura e sospetto. I funghi vengono accusati di aver violato il ciclo naturale, spingendo la comunità sull'orlo di una guerra civile. La fata Rugiada, spensierata e curiosa, e il giovane fungo Zolla, combattuto tra il dovere e l'amore, si trovano al centro di un intrigo politico che minaccia di distruggere il loro mondo e la loro nascente amicizia.",
+        },
+        { title: "Timor Est", slug: "timor-est" },
+    ],
+    cortometraggi: [
+        {
+            title: "Il Signor Mitoli, o Sulla Divisione delle Cellule Somatiche",
+            slug: "il-signor-mitoli",
+        },
+        { title: "December", slug: "december" },
+    ],
+    documentari: [
+        { title: "Achille", slug: "achille" },
+        { title: "Gli Adepti del Calcolo", slug: "gli-adepti-del-calcolo" },
+    ],
+};
 ---
 
 <WriterLayout>
-
     <main
-        class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-stone-300 rounded-2xl overflow-hidden shadow-2xl relative bg-stone-100 mb-12 md:mb-4"
+        class="flex flex-col md:flex-row w-full max-w-full md:max-w-7xl border border-stone-300 rounded-2xl overflow-hidden shadow-2xl relative bg-stone-100 h-[90vh]"
     >
-        <!-- Colonna Sinistra: Profilo e bottone per tornare indietro -->
+        <!-- Colonna Sinistra  -->
         <div
-            class="p-8 md:p-6 flex flex-col justify-between w-full md:w-2/5 border-b md:border-b-0 md:border-r border-stone-300"
+            class="p-8 md:p-6 flex flex-col justify-center w-full md:w-2/5 border-b md:border-b-0 md:border-r border-stone-300"
         >
-            <!-- Parte superiore con il profilo -->
             <WriterProfile />
-
-            <!-- Parte inferiore con il bottone per tornare indietro -->
-            <SwitchToCoder />
         </div>
 
-        <!-- Colonna Destra: Qui andranno i progetti di scrittura con i tab -->
-        <div class="w-full md:w-4/5 p-0 flex items-center justify-center">
-            <!-- Aggiunto flex per centrare -->
-            <!-- Placeholder con testo ingrandito -->
-            <div class="p-8 text-center">
-                <!-- Aggiunto text-center -->
-                <h2
-                    class="text-5xl md:text-6xl font-bold text-zinc-800"
-                    style="font-family: 'Caveat', cursive;"
-                >
-                    Lavori in Corso
-                </h2>
-                <p
-                    class="text-2xl md:text-3xl text-zinc-600 mt-4 max-w-md mx-auto"
-                    style="font-family: 'Caveat', cursive;"
-                >
-                    La fucina creativa è in piena attività. La sezione dedicata
-                    alla scrittura sta prendendo forma. Torna presto!
-                </p>
-            </div>
+        <!-- Colonna Destra  -->
+        <div class="w-full md:w-4/5 p-0">
+            <WriterProjects projects={projects} />
         </div>
     </main>
 </WriterLayout>
